@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Сен үшін 💖</title>
+  <title>Тек сен үшін ✨</title>
   <style>
     * {
       box-sizing: border-box;
@@ -18,13 +18,69 @@
       min-height: 100vh;
       overflow-x: hidden;
       position: relative;
-      padding: 50px 16px 80px;
+      padding: 40px 16px 80px;
       display: flex;
       flex-direction: column;
       align-items: center;
     }
 
-    /* Фондағы ұшатын жүрекшелер */
+    /* Кіру терезесі */
+    #welcomeModal {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(135deg, #ffd3dc, #fff0f3);
+      z-index: 999;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+      transition: opacity 0.6s ease, visibility 0.6s ease;
+    }
+
+    .welcome-card {
+      background: white;
+      border-radius: 28px;
+      padding: 35px 25px;
+      text-align: center;
+      max-width: 360px;
+      width: 100%;
+      box-shadow: 0 15px 35px rgba(216, 74, 117, 0.2);
+    }
+
+    .welcome-card h2 {
+      color: #d84a75;
+      font-size: 1.6rem;
+      margin-bottom: 12px;
+    }
+
+    .welcome-card p {
+      color: #666;
+      font-size: 1rem;
+      line-height: 1.5;
+      margin-bottom: 24px;
+    }
+
+    .start-btn {
+      background: linear-gradient(135deg, #e25580, #ff758c);
+      color: white;
+      border: none;
+      padding: 14px 32px;
+      border-radius: 30px;
+      font-size: 1.05rem;
+      font-weight: 600;
+      cursor: pointer;
+      box-shadow: 0 5px 18px rgba(226, 85, 128, 0.35);
+      transition: transform 0.2s;
+    }
+
+    .start-btn:active {
+      transform: scale(0.97);
+    }
+
+    /* Фондағы жүректер */
     .heart-bg {
       position: fixed;
       top: -10vh;
@@ -41,15 +97,15 @@
         transform: translateY(0) rotate(0deg) scale(0.8);
         opacity: 0;
       }
-      10% { opacity: 0.8; }
-      90% { opacity: 0.8; }
+      15% { opacity: 0.8; }
+      85% { opacity: 0.8; }
       100% {
         transform: translateY(115vh) rotate(360deg) scale(1.2);
         opacity: 0;
       }
     }
 
-    /* Әуен батырмасы */
+    /* Музыка түймесі */
     .music-btn {
       position: fixed;
       top: 18px;
@@ -58,40 +114,34 @@
       background: white;
       border: none;
       border-radius: 50px;
-      padding: 10px 18px;
+      padding: 8px 16px;
       display: flex;
       align-items: center;
-      gap: 8px;
-      box-shadow: 0 4px 15px rgba(226, 85, 128, 0.25);
+      gap: 6px;
+      box-shadow: 0 4px 15px rgba(226, 85, 128, 0.2);
       cursor: pointer;
-      font-size: 0.9rem;
+      font-size: 0.85rem;
       font-weight: 600;
       color: #e25580;
-      transition: all 0.3s ease;
-    }
-
-    .music-btn.playing {
-      background: #e25580;
-      color: white;
     }
 
     header {
       text-align: center;
-      margin-bottom: 35px;
+      margin-bottom: 30px;
       z-index: 2;
-      max-width: 500px;
+      max-width: 480px;
     }
 
     h1 {
       color: #d84a75;
-      font-size: 2.1rem;
+      font-size: 1.95rem;
       font-weight: 700;
       line-height: 1.3;
-      margin-bottom: 12px;
+      margin-bottom: 10px;
     }
 
     p.subtitle {
-      font-size: 1.05rem;
+      font-size: 1rem;
       color: #8c7379;
       line-height: 1.5;
     }
@@ -99,28 +149,27 @@
     .gallery {
       display: flex;
       flex-direction: column;
-      gap: 30px;
-      max-width: 440px;
+      gap: 28px;
+      max-width: 420px;
       width: 100%;
       z-index: 2;
     }
 
     .card {
       background: #ffffff;
-      border-radius: 24px;
+      border-radius: 22px;
       overflow: hidden;
-      box-shadow: 0 12px 30px rgba(216, 74, 117, 0.12);
+      box-shadow: 0 10px 25px rgba(216, 74, 117, 0.12);
       transition: transform 0.3s ease;
     }
 
     .card:hover {
-      transform: translateY(-5px);
+      transform: translateY(-4px);
     }
 
     .card-img-wrap {
       width: 100%;
-      height: 460px;
-      position: relative;
+      height: 440px;
       background: #faf0f2;
     }
 
@@ -132,12 +181,12 @@
     }
 
     .card-body {
-      padding: 20px;
+      padding: 18px;
       text-align: center;
     }
 
     .card-body p {
-      font-size: 1.05rem;
+      font-size: 1rem;
       line-height: 1.5;
       color: #444;
       font-style: italic;
@@ -145,11 +194,11 @@
 
     .badge {
       display: inline-block;
-      margin-top: 12px;
-      padding: 6px 16px;
+      margin-top: 10px;
+      padding: 5px 14px;
       background: #fff0f4;
       border-radius: 20px;
-      font-size: 0.85rem;
+      font-size: 0.8rem;
       color: #e25580;
       font-weight: 600;
     }
@@ -160,17 +209,21 @@
       z-index: 2;
     }
 
-    .magic-btn {
+    .date-invite-btn {
       background: linear-gradient(135deg, #e25580, #ff758c);
       color: white;
       border: none;
       padding: 16px 36px;
       border-radius: 40px;
-      font-size: 1.1rem;
+      font-size: 1.05rem;
       font-weight: 600;
       cursor: pointer;
       box-shadow: 0 6px 20px rgba(226, 85, 128, 0.4);
-      transition: all 0.3s ease;
+      transition: transform 0.2s;
+    }
+
+    .date-invite-btn:active {
+      transform: scale(0.96);
     }
 
     .modal-overlay {
@@ -194,9 +247,9 @@
 
     .modal-content {
       background: white;
-      padding: 35px 25px;
-      border-radius: 28px;
-      max-width: 380px;
+      padding: 30px 22px;
+      border-radius: 26px;
+      max-width: 370px;
       width: 100%;
       text-align: center;
       box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
@@ -204,127 +257,192 @@
 
     .modal-content h3 {
       color: #e25580;
-      font-size: 1.5rem;
-      margin-bottom: 15px;
+      font-size: 1.45rem;
+      margin-bottom: 12px;
     }
 
     .modal-content p {
       color: #555;
-      font-size: 1rem;
+      font-size: 0.95rem;
       line-height: 1.6;
-      margin-bottom: 24px;
+      margin-bottom: 22px;
     }
 
-    .close-btn {
-      background: #f7f7f7;
-      color: #777;
-      border: none;
-      padding: 10px 24px;
-      border-radius: 20px;
-      cursor: pointer;
+    .choice-btns {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .choice-btn {
+      background: #fff0f4;
+      color: #e25580;
+      border: 1px solid #ffd3dc;
+      padding: 12px;
+      border-radius: 18px;
+      font-size: 0.95rem;
       font-weight: 600;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+
+    .choice-btn:hover {
+      background: #ffe3e8;
+    }
+
+    .choice-btn.primary {
+      background: #e25580;
+      color: white;
+      border: none;
     }
   </style>
 </head>
 <body>
 
-  <!-- Әуен батырмасы (дәл сіздің жүктеген файл атыңыз) -->
+  <!-- Кіру терезесі -->
+  <div id="welcomeModal">
+    <div class="welcome-card">
+      <div style="font-size: 42px; margin-bottom: 12px;">💌</div>
+      <h2>Сәлем!</h2>
+      <p>Бұл шағын парақша тек саған арналған. Дыбысты қосып көруге кеңес беремін ✨</p>
+      <button class="start-btn" onclick="startExperience()">Қарап көру ✨</button>
+    </div>
+  </div>
+
+  <!-- Әуен түймесі мен файл -->
   <button class="music-btn" id="musicBtn" onclick="toggleMusic()">
     <span id="musicIcon">🎵</span>
-    <span id="musicText">Музыка</span>
+    <span id="musicText">Әуен</span>
   </button>
   <audio id="bgMusic" loop src="Nurik_Barmakov_-_Ty_ne_takaya_kak_vse_75421861.mp3"></audio>
 
   <header>
     <h1>Сенің күлкің — әлемдегі ең әдемі нәрсе ✨</h1>
-    <p class="subtitle">Әр сәтіңнің өзіне тән жылулығы мен сиқыры бар</p>
+    <p class="subtitle">Әр суретіңнің өзіне тән сұлулығы мен сиқыры бар</p>
   </header>
 
+  <!-- Карточкалар -->
   <div class="gallery">
 
-    <!-- 1-ФОТО -->
     <div class="card">
-      <div class="card-img-wrap">
-        <img src="1 (1).jpg" alt="Фото">
-      </div>
+      <div class="card-img-wrap"><img src="1 (1).jpg" alt="Фото"></div>
       <div class="card-body">
-        <p>«Көзіңдегі мейірім кез келген күнді жылытып жібереді.»</p>
-        <span class="badge">Ең ерекше сәт ✨</span>
+        <p>«Осы күлкің кез келген күнді ерекше нұрландырып жібереді.»</p>
+        <span class="badge">Жылы күлкі 🌸</span>
       </div>
     </div>
 
-    <!-- 2-ФОТО -->
     <div class="card">
-      <div class="card-img-wrap">
-        <img src="1 (10).jpg" alt="Фото">
-      </div>
+      <div class="card-img-wrap"><img src="1 (10).jpg" alt="Фото"></div>
       <div class="card-body">
-        <p>«Осы күлкіңді көргенде бүкіл әлем бір сәтке тоқтап қалады.»</p>
-        <span class="badge">Шексіз сұлулық 🌸</span>
+        <p>«Көзіңнің тұнықтығы мен тереңдігіне сүйсінбеу мүмкін емес.»</p>
+        <span class="badge">Тұнық көздер ✨</span>
       </div>
     </div>
 
-    <!-- 3-ФОТО -->
     <div class="card">
-      <div class="card-img-wrap">
-        <img src="1 (12).jpg" alt="Фото">
-      </div>
+      <div class="card-img-wrap"><img src="1 (11).jpg" alt="Фото"></div>
       <div class="card-body">
-        <p>«Сенің болмысың мен нәзіктігіңе тамсанбау мүмкін емес.»</p>
-        <span class="badge">Ғажайып жан 💫</span>
+        <p>«Болмысыңда өте жұмсақ әрі сиқырлы бір тазалық бар.»</p>
+        <span class="badge">Ерекше нәзіктік 💫</span>
       </div>
     </div>
 
-    <!-- 4-ФОТО -->
     <div class="card">
-      <div class="card-img-wrap">
-        <img src="1 (14).jpg" alt="Фото">
-      </div>
+      <div class="card-img-wrap"><img src="1 (12).jpg" alt="Фото"></div>
       <div class="card-body">
-        <p>«Сенің қарапайым ғана бір қарағаның көңіл-күйді бірден көтереді.»</p>
-        <span class="badge">Жылы сәттер 🌿</span>
+        <p>«Сенің күлкіңді көргенде адамның көңілі еріксіз көтеріледі.»</p>
+        <span class="badge">Шуақты сәт 🌿</span>
       </div>
     </div>
 
-    <!-- 5-ФОТО -->
     <div class="card">
-      <div class="card-img-wrap">
-        <img src="1 (16).jpg" alt="Фото">
-      </div>
+      <div class="card-img-wrap"><img src="1 (13).jpg" alt="Фото"></div>
       <div class="card-body">
-        <p>«Сен бар жерде әрқашан ерекше жайлылық бар.»</p>
-        <span class="badge">Асыл жан 🤍</span>
+        <p>«Қарапайым ғана бір қарағаныңның өзінде ерекше сүйкімділік бар.»</p>
+        <span class="badge">Сұлулық 🤍</span>
       </div>
     </div>
 
-    <!-- 6-ФОТО -->
     <div class="card">
-      <div class="card-img-wrap">
-        <img src="1 (20).jpg" alt="Фото">
-      </div>
+      <div class="card-img-wrap"><img src="1 (14).jpg" alt="Фото"></div>
       <div class="card-body">
-        <p>«Сен нағыз ертегі кейіпкеріндей нәзіксің.»</p>
-        <span class="badge">Сүйкімді 💖</span>
+        <p>«Сенің әр суретіңнен шынайы табиғи сұлулық көрініп тұрады.»</p>
+        <span class="badge">Шынайылық 🕊️</span>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-img-wrap"><img src="1 (15).jpg" alt="Фото"></div>
+      <div class="card-body">
+        <p>«Күлген кезіңде жүзің нағыз күннің шуағындай жарқырап кетеді.»</p>
+        <span class="badge">Күндей жарық ☀️</span>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-img-wrap"><img src="1 (16).jpg" alt="Фото"></div>
+      <div class="card-body">
+        <p>«Сен нағыз ертегі кейіпкеріндей талғампаз әрі нәзіксің.»</p>
+        <span class="badge">Өзгеше әлем 💖</span>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-img-wrap"><img src="1 (17).jpg" alt="Фото"></div>
+      <div class="card-body">
+        <p>«Сенің күлген сәтің бүкіл айналаны әдемі етіп жібереді.»</p>
+        <span class="badge">Сүйкімді жүз ✨</span>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-img-wrap"><img src="1 (18).jpg" alt="Фото"></div>
+      <div class="card-body">
+        <p>«Өзіңе ғана тән ерекше сүйкімді болмысың бар.»</p>
+        <span class="badge">Ерекше жан 🌸</span>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-img-wrap"><img src="1 (19).jpg" alt="Фото"></div>
+      <div class="card-body">
+        <p>«Сенің күлкің жүзге қуаныш сыйлайды.»</p>
+        <span class="badge">Асыл жан ✨</span>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-img-wrap"><img src="1 (20).jpg" alt="Фото"></div>
+      <div class="card-body">
+        <p>«Әрқашан осылай жарқырап, күліп жүрші!»</p>
+        <span class="badge">Ең тәтті сәт 💖</span>
       </div>
     </div>
 
   </div>
 
+  <!-- Төменгі ұсыныс батырмасы -->
   <footer>
-    <button class="magic-btn" onclick="openModal()">Маңызды хат бар 💌</button>
+    <button class="date-invite-btn" onclick="openDateModal()">Саған бір сұрақ бар еді... ☕</button>
   </footer>
 
-  <div class="modal-overlay" id="modal" onclick="closeModalDirect(event)">
+  <!-- Ұсыныс терезесі -->
+  <div class="modal-overlay" id="dateModal" onclick="closeModalDirect(event)">
     <div class="modal-content">
-      <div style="font-size: 45px; margin-bottom: 10px;">❤️</div>
-      <h3>Саған арналған лебіз</h3>
-      <p>Сен — мен үшін әлемдегі ең жарық, ең ерекше адамсың. Күлкің ешқашан жүзіңнен кетпесін! Әрқашан осылай жарқырап жүр. ✨</p>
-      <button class="close-btn" onclick="closeModal()">Жабу</button>
+      <div style="font-size: 44px; margin-bottom: 12px;">☕✨</div>
+      <h3>Кішкентай ой...</h3>
+      <p>Осы күлкіңді өмірде бір рет көріп, бірге ыстық кофе немесе шай ішсек қалай болар еді? 😊</p>
+      
+      <div class="choice-btns">
+        <button class="choice-btn primary" onclick="acceptDate()">Өте керемет ой болар еді! ☕</button>
+        <button class="choice-btn" onclick="acceptDate()">Ойланып көруге болады 😊</button>
+      </div>
     </div>
   </div>
 
   <script>
-    const heartSymbols = ['❤️', '💖', '✨', '🌸', '💕'];
+    const heartSymbols = ['❤️️', '💖', '✨', '🌸', '💕'];
     function createHeart() {
       const heart = document.createElement('div');
       heart.className = 'heart-bg';
@@ -342,34 +460,55 @@
     const musicIcon = document.getElementById('musicIcon');
     const musicText = document.getElementById('musicText');
 
+    function startExperience() {
+      const welcome = document.getElementById('welcomeModal');
+      welcome.style.opacity = '0';
+      setTimeout(() => {
+        welcome.style.display = 'none';
+      }, 600);
+
+      audio.play().then(() => {
+        musicIcon.innerText = '⏸️';
+        musicText.innerText = 'Ойнап тұр';
+      }).catch(e => console.log(e));
+
+      for(let i = 0; i < 20; i++) {
+        setTimeout(createHeart, i * 80);
+      }
+    }
+
     function toggleMusic() {
       if (audio.paused) {
-        audio.play().catch(e => console.log(e));
-        musicBtn.classList.add('playing');
+        audio.play();
         musicIcon.innerText = '⏸️';
         musicText.innerText = 'Ойнап тұр';
       } else {
         audio.pause();
-        musicBtn.classList.remove('playing');
         musicIcon.innerText = '🎵';
-        musicText.innerText = 'Музыка';
+        musicText.innerText = 'Әуен';
       }
     }
 
-    function openModal() {
-      document.getElementById('modal').classList.add('active');
-      for(let i = 0; i < 15; i++) {
-        setTimeout(createHeart, i * 60);
-      }
-    }
-
-    function closeModal() {
-      document.getElementById('modal').classList.remove('active');
+    function openDateModal() {
+      document.getElementById('dateModal').classList.add('active');
     }
 
     function closeModalDirect(e) {
-      if (e.target.id === 'modal') {
-        closeModal();
+      if (e.target.id === 'dateModal') {
+        document.getElementById('dateModal').classList.remove('active');
+      }
+    }
+
+    function acceptDate() {
+      const content = document.querySelector('.modal-content');
+      content.innerHTML = `
+        <div style="font-size: 45px; margin-bottom: 12px;">🥰</div>
+        <h3 style="color: #e25580; margin-bottom: 10px;">Күшті!</h3>
+        <p style="color: #555; line-height: 1.6;">Ендеше бұл туралы маған жекеге жаз, күтемін... ✨</p>
+        <button class="choice-btn primary" style="width: 100%; margin-top: 15px;" onclick="location.reload()">Жабу</button>
+      `;
+      for(let i = 0; i < 25; i++) {
+        setTimeout(createHeart, i * 50);
       }
     }
   </script>
